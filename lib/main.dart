@@ -5,8 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:treezoo_frontend/main_screen.dart';
 import 'package:treezoo_frontend/theme/theme_provider.dart';
 
-import 'theme/app_theme.dart';
-
 void main() {
   // ProviderScopeでアプリケーション全体をラップすることで、アプリ全体がRiverpodで状態管理される
   runApp(ProviderScope(child: TreeZooApp()));

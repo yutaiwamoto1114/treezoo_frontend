@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// 右ペインの開閉状態を管理するProvider
-final isRightPaneOpenProvider = StateProvider<bool>((ref) => true);
-
-// 右ペインのサイズを管理するProvider
-final rightPaneWidthProvider = StateProvider<double>((ref) => 300.0); // 初期幅300
+import 'provider/main_provider.dart';
+import 'model/main_model.dart';
 
 // 右ペインウィジェット
 // Providerから状態を取得するのでConsumerWidgetとして定義
@@ -19,26 +16,42 @@ class RightPane extends ConsumerWidget {
     final screenWidth = MediaQuery.of(context).size.width; // 画面幅
     final maxPaneWidth = screenWidth * 0.4; // 最大幅を画面幅の40%に制限
 
+    // 現在選択されている動物の情報
+    final Animal? animal = ref.watch(selectedAnimalProvider);
+
     // AnimatedContainer: アニメーションをつけるContainer
     return isOpen
         ? AnimatedContainer(
             // duration: アニメーションの長さ
-            duration: Duration(milliseconds: 2300),
+            duration: Duration(milliseconds: 2000),
             width: currentWidth, // 幅調整
-            color: Colors.grey[200], // ペインの背景色を設定
+            color: Colors.grey[100], // ペインの背景色を設定
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end, // コンテンツを右寄せに設定
+              crossAxisAlignment: CrossAxisAlignment.start, // コンテンツを左寄せに設定
               children: [
-                IconButton(
-                  icon: Icon(Icons.close),
-                  onPressed: () =>
-                      ref.read(isRightPaneOpenProvider.notifier).state = false,
-                  alignment: Alignment.topRight, // ボタンを右上に配置
+                Align(
+                  // Align: 親要素のalignとは無関係にchildの要素を整列する
+                  alignment: Alignment.topRight, // 右上に配置
+                  child: IconButton(
+                    icon: Icon(Icons.close),
+                    onPressed: () => ref
+                        .read(isRightPaneOpenProvider.notifier)
+                        .state = false,
+                  ),
                 ),
                 Expanded(
-                  child: Center(
-                    child: Text("詳細情報が表示されます"),
-                  ),
+                  child: animal != null
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('${animal.name}',
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium),
+                            Text('種族: ${animal.species}'),
+                            Text('${animal.age} 歳 ${animal.gender}')
+                          ],
+                        )
+                      : Text('動物を選択すると詳細がここに表示されます'),
                 ),
               ],
             ))

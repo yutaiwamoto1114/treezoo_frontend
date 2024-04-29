@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:treezoo_frontend/family_tree.dart';
 import 'package:treezoo_frontend/theme/theme_provider.dart';
 import 'right_pane.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'provider/main_provider.dart';
 
 class MainScreen extends ConsumerWidget {
   @override
@@ -32,11 +34,15 @@ class MainScreen extends ConsumerWidget {
       ),
       body: Row(
         children: <Widget>[
-          const Expanded(
-            child: Center(
-              child: Text('家系図アプリのメインコンテンツ'),
-            ),
-          ),
+          // Expanded: RowやColumnのchildren要素として配置したウィジェットの隙間を埋める
+          // つまり、今回はFamilyTreeとRightPaneが横いっぱいに拡大される
+          Expanded(
+              child: InteractiveViewer(
+            boundaryMargin: EdgeInsets.all(80),
+            minScale: 0.1,
+            maxScale: 5.0,
+            child: FamilyTree(), // 家系図のメインコンテンツ,
+          )),
           isRightPaneOpen
               ? RightPane()
               : _buildOpenButton(context, ref), // 右ペインを追加
