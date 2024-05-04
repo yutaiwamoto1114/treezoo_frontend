@@ -17,7 +17,7 @@ class RightPane extends ConsumerWidget {
     final maxPaneWidth = screenWidth * 0.4; // 最大幅を画面幅の40%に制限
 
     // 現在選択されている動物の情報
-    final Animal? animal = ref.watch(selectedAnimalProvider);
+    final AnimalSummary? animal = ref.watch(selectedAnimalProvider);
 
     // AnimatedContainer: アニメーションをつけるContainer
     return isOpen
@@ -44,7 +44,7 @@ class RightPane extends ConsumerWidget {
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('${animal.name}',
+                            Text('${animal.animalName}',
                                 style:
                                     Theme.of(context).textTheme.headlineMedium),
                             Text('種族: ${animal.species}'),

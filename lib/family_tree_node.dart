@@ -8,7 +8,7 @@ import 'provider/main_provider.dart'; // Provider (isRightPaseOpenProvider) を�
 
 class FamilyTreeNode extends ConsumerWidget {
   // 動物の情報を受け取る
-  final Animal node;
+  final AnimalSummary node;
 
   // コンストラクタ
   const FamilyTreeNode({Key? key, required this.node}) : super(key: key);
@@ -24,17 +24,17 @@ class FamilyTreeNode extends ConsumerWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(color: ref.watch(themeProvider).primaryColor),
+          border: Border.all(color: Theme.of(context).colorScheme.primary),
           borderRadius: BorderRadius.circular(5),
         ),
-        padding: EdgeInsets.all(8),
-        margin: EdgeInsets.all(4),
+        padding: const EdgeInsets.all(8),
+        margin: const EdgeInsets.all(4),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ノードには最低限の情報のみ表示し、クリック時に右ペインで詳細を補完する
-            Text(node.name,
-                style: Theme.of(context).textTheme.headlineMedium), // 動物の名前
+            Text(node.animalName, style: Theme.of(context).textTheme.headline6),
+            Text('${node.species}・${node.age}歳・${node.gender}'),
+            Text('${node.currentZooName}'),
           ],
         ),
       ),
