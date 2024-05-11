@@ -23,18 +23,18 @@ class FamilyTreeNode extends ConsumerWidget {
         ref.read(selectedAnimalProvider.notifier).state = node;
       },
       child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: Theme.of(context).colorScheme.primary),
-          borderRadius: BorderRadius.circular(5),
-        ),
+        // decoration: BoxDecoration(
+        //   border: Border.all(color: Theme.of(context).colorScheme.primary),
+        //   borderRadius: BorderRadius.circular(5),
+        // ),
         padding: const EdgeInsets.all(8),
         margin: const EdgeInsets.all(4),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(node.animalName, style: Theme.of(context).textTheme.headline6),
-            Text('${node.species}・${node.age}歳・${node.gender}'),
-            Text('${node.currentZooName}'),
+            // Text('${node.species}・${node.age}歳・${node.gender}'),
+            // Text('${node.currentZooName}'),
           ],
         ),
       ),

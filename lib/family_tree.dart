@@ -12,9 +12,12 @@ class FamilyTree extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // familyTreeProviderからデータを取得
+    // AysncValue は、非同期処理で発生するloading/error状態をハンドリングできるクラス
     final familyTree = ref.watch(familyTreeProvider);
 
+    // .when: AsyncValueを取り出す際の書式。3状態に応じて表示を切り替えられる
     return familyTree.when(
+      // data: ロード完了後の表示
       data: (animalsMap) {
         return ListView(
           children: animalsMap.values
@@ -22,7 +25,9 @@ class FamilyTree extends ConsumerWidget {
               .toList(),
         );
       },
+      // loading: ローディング中の表示
       loading: () => const Center(child: CircularProgressIndicator()),
+      // error: ロード失敗時の表示
       error: (err, _) => Center(child: Text('エラーが発生しました: $err')),
     );
   }
