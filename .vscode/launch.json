@@ -20,6 +20,14 @@
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
+        },
+        {
+            "name": "dev",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--dart-define-from-file=lib/flavor/dev.json"
+            ]
         }
     ]
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:treezoo_frontend/theme/theme_provider.dart';
+import 'package:treezoo_frontend/provider/theme_provider.dart';
 import 'family_tree.dart';
 import 'right_pane.dart';
 import 'grid_family_tree.dart';

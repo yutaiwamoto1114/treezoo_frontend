@@ -1,7 +1,9 @@
 // lib/provider/main_provider.dart
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:treezoo_frontend/model/main_model.dart';
-import '../service/family_service.dart';
+import 'package:treezoo_frontend/service/family_service.dart';
+import 'package:treezoo_frontend/service/picture_service.dart';
 
 // 右ペインの開閉状態を管理するProvider
 final isRightPaneOpenProvider = StateProvider<bool>((ref) => true);
@@ -15,6 +17,7 @@ final animalDetailsProvider = StateProvider<Map<String, Animal>>((ref) => {});
 // 現在選択している動物の情報を保持するProvider
 final selectedAnimalProvider = StateProvider<AnimalSummary?>((ref) => null);
 
+// 家系図サービスのインスタンスを提供するProvider(家系図サービスに定義した関数を呼び出すためのインターフェース)
 final familyServiceProvider = Provider<FamilyService>((ref) {
   return FamilyService();
 });
@@ -23,3 +26,12 @@ final familyServiceProvider = Provider<FamilyService>((ref) {
 final familyTreeProvider = FutureProvider<Map<int, AnimalSummary>>((ref) async {
   return ref.read(familyServiceProvider).fetchAnimalsWithRelations();
 });
+
+// 写真サービスのインスタンスを提供するProvider
+final pictureServiceProvider = Provider<PictureService>((ref) {
+  return PictureService();
+});
+
+// 現在選択している動物の写真をMapとして保持する
+final selectedAnimalPictureProvider =
+    StateProvider<AnimalProfilePicture?>((ref) => null);

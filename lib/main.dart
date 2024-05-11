@@ -1,12 +1,10 @@
 // main.dart
 
-import 'dart:io';
 import 'package:logger/logger.dart';
-import 'package:path/path.dart' as path;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:treezoo_frontend/main_screen.dart';
-import 'package:treezoo_frontend/theme/theme_provider.dart';
+import 'package:treezoo_frontend/provider/theme_provider.dart';
 
 void main() {
   // log設定

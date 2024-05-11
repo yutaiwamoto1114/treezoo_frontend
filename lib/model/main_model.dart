@@ -1,6 +1,9 @@
 // lib/model/main_model.dart
 // すべてのmodelクラスをまとめて定義します
 
+import 'dart:convert';
+import 'dart:typed_data';
+
 class Animal {
   final int id;
   final String name;
@@ -112,6 +115,57 @@ class AnimalSummary {
       'current_zoo_name': currentZooName,
       'parents': parents,
       'children': children,
+    };
+  }
+}
+
+class AnimalProfilePicture {
+  final int animalId;
+  final int pictureId;
+  final Uint8List pictureData;
+  final String? description;
+  final bool? isProfile;
+  final int? priority;
+  final DateTime? shootDate;
+  final DateTime? uploadDate;
+
+  AnimalProfilePicture({
+    required this.animalId,
+    required this.pictureId,
+    required this.pictureData,
+    this.description,
+    this.isProfile,
+    this.priority,
+    this.shootDate,
+    this.uploadDate,
+  });
+
+  factory AnimalProfilePicture.fromJson(Map<String, dynamic> json) {
+    return AnimalProfilePicture(
+      animalId: json['animal_id'],
+      pictureId: json['picture_id'],
+      pictureData: base64Decode(json['picture_data']),
+      description: json['description'],
+      isProfile: json['is_profile'],
+      priority: json['priority'],
+      shootDate: json['shoot_date'] != null
+          ? DateTime.parse(json['shoot_date'])
+          : null,
+      uploadDate: json['upload_date'] != null
+          ? DateTime.parse(json['upload_date'])
+          : null,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'picture_id': pictureId,
+      'picture_data': base64Encode(pictureData),
+      'description': description,
+      'is_profile': isProfile,
+      'priority': priority,
+      'shoot_date': shootDate?.toIso8601String(),
+      'upload_date': uploadDate?.toIso8601String(),
     };
   }
 }

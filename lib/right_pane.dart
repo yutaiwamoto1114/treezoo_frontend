@@ -48,7 +48,18 @@ class RightPane extends ConsumerWidget {
                                 style:
                                     Theme.of(context).textTheme.headlineMedium),
                             Text('種族: ${animal.species}'),
-                            Text('${animal.age} 歳 ${animal.gender}')
+                            Text('${animal.age} 歳 ${animal.gender}'),
+                            // 動物のプロフィール写真を表示する
+                            Consumer(
+                              builder: (context, ref, child) {
+                                final picture =
+                                    ref.watch(selectedAnimalPictureProvider);
+                                return picture != null &&
+                                        picture.pictureData != null
+                                    ? Image.memory(picture.pictureData)
+                                    : const Text('No Image');
+                              },
+                            )
                           ],
                         )
                       : Text('動物を選択すると詳細がここに表示されます'),
