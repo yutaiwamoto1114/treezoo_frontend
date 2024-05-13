@@ -1,0 +1,7 @@
+{
+    "flavor": "dev",
+    "appName": "TreeZoo Dev",
+    "baseURL": "http://localhost/",
+    "webServerHost": "http://localhost/",
+    "apiServerHost": "http://localhost:8080/"
+}
