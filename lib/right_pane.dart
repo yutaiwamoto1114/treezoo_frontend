@@ -33,7 +33,7 @@ class RightPane extends ConsumerWidget {
                   // Align: 親要素のalignとは無関係にchildの要素を整列する
                   alignment: Alignment.topRight, // 右上に配置
                   child: IconButton(
-                    icon: Icon(Icons.close),
+                    icon: Icon(Icons.chevron_right),
                     onPressed: () => ref
                         .read(isRightPaneOpenProvider.notifier)
                         .state = false,
