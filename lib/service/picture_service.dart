@@ -14,14 +14,30 @@ class PictureService {
       final response =
           await http.get(Uri.parse('$_baseUrl/animal/profile/$animalId'));
       if (response.statusCode == 200) {
-        print(jsonDecode(response.body));
         return AnimalProfilePicture.fromJson(jsonDecode(response.body));
       } else {
         throw Exception('Failed to load picture: ${response.statusCode}');
       }
     } catch (e) {
-      print('Error fetching picture: $e');
+      print('選択した動物のプロフィール写真取得に失敗しました: $e');
       return null;
+    }
+  }
+
+  // /picture/animal/profiles から取得したプロフィール写真を返す(全件取得)
+  Future<Map<int, AnimalProfilePicture>> fetchAnimalProfilePictures() async {
+    final response = await http.get(Uri.parse('$_baseUrl/animal/profiles'));
+
+    if (response.statusCode == 200) {
+      List<dynamic> data = jsonDecode(response.body);
+      // animalIdとそれに対応するプロフィール写真のMapとして返却
+
+      return Map.fromIterable(data,
+          key: (item) => item['animal_id'] as int,
+          value: (item) =>
+              AnimalProfilePicture.fromJson(item as Map<String, dynamic>));
+    } else {
+      throw Exception('家系図全体のプロフィール写真取得に失敗しました');
     }
   }
 }

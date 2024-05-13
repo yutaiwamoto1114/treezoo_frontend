@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'family_tree_node.dart'; // カスタムしたノード表示ウィジェット
 import 'model/main_model.dart';
 import 'provider/main_provider.dart';
+import 'dart:typed_data';
 
 class GridFamilyTree extends ConsumerWidget {
   final double cellWidth = 100; // グリッドのセルの幅
@@ -21,10 +22,30 @@ class GridFamilyTree extends ConsumerWidget {
           crossAxisCount: 3, // 一行に3つのセルを配置
           childAspectRatio: cellWidth / cellHeight, // セルの比率を設定
           children: animalsMap.values.map((animal) {
-            return Card(
-              child: Center(
-                child: FamilyTreeNode(node: animal), // 各動物をノードとして表示
-              ),
+            return FutureBuilder<AnimalProfilePicture?>(
+              future: ref
+                  .read(pictureServiceProvider)
+                  .fetchAnimalProfilePicture(animal.animalId),
+              builder: (context, snapshot) {
+                // データ取得中にプログレスインジケータを表示
+                if (snapshot.connectionState != ConnectionState.done) {
+                  return const Card(
+                      child: Center(child: CircularProgressIndicator()));
+                }
+                if (snapshot.hasError) {
+                  return Card(child: Center(child: Text('画像の取得に失敗しました')));
+                }
+                final profilePicture = snapshot.data;
+                return FamilyTreeNode(
+                  animal: animal,
+                  profilePicture: profilePicture ??
+                      AnimalProfilePicture(
+                        pictureId: 0,
+                        pictureData: Uint8List(0), // エラー時のプレースホルダー
+                        animalId: animal.animalId,
+                      ),
+                );
+              },
             );
           }).toList(),
         );
