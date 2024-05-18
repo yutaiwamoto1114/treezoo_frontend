@@ -1,5 +1,6 @@
 // main.dart
 
+import 'package:flutter/rendering.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,6 +11,9 @@ void main() {
   // log設定
   var logger = Logger();
   logger.d("Logger is working!");
+
+  // タップ領域を視覚的に表示するためのフラグを有効化
+  debugPaintPointersEnabled = true;
 
   // ProviderScopeでアプリケーション全体をラップすることで、アプリ全体がRiverpodで状態管理される
   runApp(ProviderScope(child: TreeZooApp()));

@@ -1,16 +1,16 @@
 // lib/grid_family_tree.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'family_tree_node.dart'; // カスタムしたノード表示ウィジェット
+import 'old_family_tree_node.dart'; // カスタムしたノード表示ウィジェット
 import 'model/main_model.dart';
 import 'provider/main_provider.dart';
 import 'dart:typed_data';
 
-class GridFamilyTree extends ConsumerWidget {
+class OldGridFamilyTree extends ConsumerWidget {
   final double cellWidth = 100; // グリッドのセルの幅
   final double cellHeight = 100; // グリッドのセルの高さ
 
-  GridFamilyTree({Key? key}) : super(key: key);
+  OldGridFamilyTree({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -36,7 +36,7 @@ class GridFamilyTree extends ConsumerWidget {
                   return Card(child: Center(child: Text('画像の取得に失敗しました')));
                 }
                 final profilePicture = snapshot.data;
-                return FamilyTreeNode(
+                return FamilyTreeNodeOld(
                   animal: animal,
                   profilePicture: profilePicture ??
                       AnimalProfilePicture(
