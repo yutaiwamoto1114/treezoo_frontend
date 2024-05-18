@@ -169,3 +169,25 @@ class AnimalProfilePicture {
     };
   }
 }
+
+class ParentChildRelation {
+  final int childId;
+  final int parentId;
+
+  ParentChildRelation({
+    required this.childId,
+    required this.parentId,
+  });
+
+  factory ParentChildRelation.fromJson(Map<String, dynamic> json) {
+    return ParentChildRelation(
+        childId: json['child_id'], parentId: json['parent_id']);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'child_id': childId,
+      'parent_id': parentId,
+    };
+  }
+}

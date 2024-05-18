@@ -21,11 +21,11 @@
 ├── lib: ソースコードです。
 │   ├── component
 │   ├── constant: 定数をまとめます。
-│   ├── core
-│   ├── infrastructure
+│   ├── core: 例外クラスやLoggerなどビジネスロジックに無関係なコアクラスを管理します。
+│   ├── infrastructure: API通信を行うためのインターフェースを提供します。
 │   ├── model: データ型を定義するモデルクラスをまとめます。
 │   ├── provider: Riverpodによって管理される状態管理変数をまとめます。
-│   ├── repository
+│   ├── service: ビジネスロジックの役割を持つクラスをまとめます。
 │   ├── router
 │   ├── ui_core
 │   ├── view

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:treezoo_frontend/provider/theme_provider.dart';
-import 'family_tree.dart';
 import 'right_pane.dart';
 import 'left_pane.dart';
-import 'grid_family_tree.dart';
+import 'family_tree.dart'; // 家系図ver1
+import 'grid_family_tree.dart'; //家系図ver2
+import 'family_tree_screen.dart'; // 家系図ver3
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'provider/main_provider.dart';
 
@@ -42,6 +43,9 @@ class MainScreen extends ConsumerWidget {
       ),
       body: Row(
         children: <Widget>[
+          // isLeftPaneOpenがtrueのときのみ、右ペインを表示
+          isLeftPaneOpen ? LeftPane() : _buildLeftOpenButton(context, ref),
+
           // Expanded: RowやColumnのchildren要素として配置したウィジェットの隙間を埋める
           // つまり、今回はFamilyTreeとRightPaneが横いっぱいに拡大される
 
@@ -56,8 +60,6 @@ class MainScreen extends ConsumerWidget {
             child: FamilyTree(), // 家系図のメインコンテンツ,
           )),
           */
-          // isLeftPaneOpenがtrueのときのみ、右ペインを表示
-          isLeftPaneOpen ? LeftPane() : _buildLeftOpenButton(context, ref),
 
           // 家系図その2: Gridを利用した実装
           Expanded(
@@ -68,6 +70,18 @@ class MainScreen extends ConsumerWidget {
             transformationController: transformationController,
             child: GridFamilyTree(),
           )),
+
+          // 家系図その3: GPT 4oによる実装
+          Expanded(
+            child: InteractiveViewer(
+              boundaryMargin: EdgeInsets.all(80),
+              minScale: 0.1,
+              maxScale: 5.0,
+              transformationController: transformationController,
+              child: FamilyTreeScreen(rootAnimalId: 1),
+            ),
+          ),
+
           // isRightPaneOpenがtrueのときのみ、右ペインを表示
           isRightPaneOpen ? RightPane() : _buildOpenButton(context, ref),
         ],
