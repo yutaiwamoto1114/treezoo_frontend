@@ -1,15 +1,19 @@
+<!-- omit in toc -->
 # treezoo_frontend
 
 動物園で暮らす動物たちの家系図アプリ「TreeZoo」のフロントエンドを提供するFlutterプロジェクトです。
 
-## 利用技術
-- Dart
-- Flutter
-- Riverpod
+## 1. 構成
+- Flutter 3.19.5
+  - Riverpod
+  - Http
+  - Logger
+  - Google Fonts
 
-## ディレクトリ構成
-以下の記事を参考にディレクトリ構成を定めています。
-[【Flutter】そのディレクトリ構成は恋される | Zenn](https://zenn.dev/web_tips/articles/530d02aaf90400)
+バックエンドを提供するGoプロジェクトは [treezoo_backend](https://github.com/yutaiwamoto1114/treezoo_backend) にて公開しています。
+
+
+## 2. ディレクトリ構成
 ```
 .
 ├── android
@@ -26,6 +30,7 @@
 │   ├── model: データ型を定義するモデルクラスをまとめます。
 │   ├── provider: Riverpodによって管理される状態管理変数をまとめます。
 │   ├── service: ビジネスロジックの役割を持つクラスをまとめます。
+│   ├── flavor: 環境切り替えを行う設定ファイルをまとめます。
 │   ├── router
 │   ├── ui_core
 │   ├── view
@@ -43,26 +48,54 @@
     └── view_model
 ```
 
-## デバッグ方法
+## 3. デバッグ方法
 1. VSCodeにFlutterの拡張機能をインストールします。
 2. F5キーを押します。
 
-## ビルド方法
+## 4. ビルド方法
 デプロイしたいプラットフォームごとにビルドを実施します。
-### Webビルド(PCブラウザ)
-### iOSビルド
-### Androidビルド
-### Windowsビルド
+### 4.1. Webビルド(PCブラウザ)
+- dev環境
+    ```
+    flutter build web --dart-define-from-file=lib/flavor/dev.json --base-href=/treezoo/
+    ```
+- stg環境
+    ```
+    flutter build web --dart-define-from-file=lib/flavor/stg.json --base-href=/treezoo/
+    ```
+- pord環境
+    ```
+    flutter build web --dart-define-from-file=lib/flavor/prod.json --base-href=/treezoo/
+    ```
 
-## Getting Started
+### 4.2. iOSビルド
+- 対応予定
 
-This project is a starting point for a Flutter application.
+### 4.3. Androidビルド
+- 対応予定
 
-A few resources to get you started if this is your first Flutter project:
+### 4.4. Windowsビルド
+- 対応予定なし
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## デプロイ
+### Apache HTTP Serverへのデプロイ
+1. Apache HTTP Server 2.4 をダウンロードし、任意のディレクトリに配置します。
+   - [Apache VS17 binaries and modules download](https://www.apachelounge.com/download/`)
+2. システム環境変数PathにApache24のbinフォルダへのパスを登録します。
+   - `C:\opt\Apache24\bin`
+3. httpd.confに以下のディレクティブを追記します。
+    ```
+    # treezoo deployment
+    # Alias設定を追加
+    Alias /treezoo "${SRVROOT}/htdocs/treezoo"
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+    <Directory "${SRVROOT}/htdocs/treezoo">
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+    ```
+4. Webビルドしたリソース `\treezoo_frontend\build\web` をApacheのドキュメントルート配下に配置します。
+    - `C:\opt\Apache24\htdocs\treezoo`
+5. サービス `Apache2.4` を開始します。
+6. `http://localhost/treezoo` でアプリケーションの動作確認をします。
