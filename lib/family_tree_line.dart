@@ -29,6 +29,7 @@ class FamilyTreeLine extends StatelessWidget {
   }
 }
 
+// ノード同士を結ぶ線を描画する
 class LinePainter extends CustomPainter {
   final double startX;
   final double startY;

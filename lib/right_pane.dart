@@ -13,8 +13,8 @@ class RightPane extends ConsumerWidget {
     final currentWidth = ref.watch(rightPaneWidthProvider); // 現在の幅
 
     // 将来的にペインの幅を調整できるようにしたい
-    final screenWidth = MediaQuery.of(context).size.width; // 画面幅
-    final maxPaneWidth = screenWidth * 0.4; // 最大幅を画面幅の40%に制限
+    // final screenWidth = MediaQuery.of(context).size.width; // 画面幅
+    // final maxPaneWidth = screenWidth * 0.4; // 最大幅を画面幅の40%に制限
 
     // 現在選択されている動物の情報
     final AnimalSummary? animal = ref.watch(selectedAnimalProvider);
@@ -54,8 +54,7 @@ class RightPane extends ConsumerWidget {
                               builder: (context, ref, child) {
                                 final picture =
                                     ref.watch(selectedAnimalPictureProvider);
-                                return picture != null &&
-                                        picture.pictureData != null
+                                return picture != null
                                     ? Image.memory(picture.pictureData)
                                     : const Text('No Image');
                               },

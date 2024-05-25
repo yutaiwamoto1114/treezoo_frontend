@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'provider/main_provider.dart';
-import 'model/main_model.dart';
 
 // 右ペインウィジェット
 // Providerから状態を取得するのでConsumerWidgetとして定義
@@ -13,8 +12,8 @@ class LeftPane extends ConsumerWidget {
     final currentWidth = ref.watch(leftPaneWidthProvider); // 現在の幅
 
     // 将来的にペインの幅を調整できるようにしたい
-    final screenWidth = MediaQuery.of(context).size.width; // 画面幅
-    final maxPaneWidth = screenWidth * 0.4; // 最大幅を画面幅の40%に制限
+    // final screenWidth = MediaQuery.of(context).size.width; // 画面幅
+    // final maxPaneWidth = screenWidth * 0.4; // 最大幅を画面幅の40%に制限
 
     // 検索条件
     // final AnimalSummary? animal = ref.watch(selectedAnimalProvider);

@@ -3,14 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:treezoo_frontend/model/main_model.dart';
 import 'package:treezoo_frontend/provider/main_provider.dart';
 
+// 動物のノード
 class FamilyTreeNode extends ConsumerWidget {
-  // 動物の情報を受け取る
-  final AnimalSummary animal;
-  // 動物のプロフィール写真を受け取る
-  final AnimalProfilePicture? profilePicture;
-  final double x;
-  final double y;
-  final double nodeSize;
+  final AnimalSummary animal; // 動物のサマリ情報
+  final AnimalProfilePicture? profilePicture; // 動物のプロフィール写真
+  final double x; // ノードのx座標
+  final double y; // ノードのy座標
+  final double nodeSize; // ノードのサイズ
 
   const FamilyTreeNode({
     super.key,
@@ -23,6 +22,10 @@ class FamilyTreeNode extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    /*
+      Positioned: ウィジェットを任意に重ねて配置したいときに利用する
+        GestureDetector: タッチ検出
+    */
     return Positioned(
       left: x,
       top: y,
@@ -37,7 +40,7 @@ class FamilyTreeNode extends ConsumerWidget {
         },
         child: Card(
           margin: EdgeInsets.all(0), // グリッドに合わせるために余白を消す
-          elevation: 10,
+          elevation: 10, // 影の濃さ
           child: SizedBox(
             width: nodeSize,
             height: nodeSize,

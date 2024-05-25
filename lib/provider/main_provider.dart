@@ -1,5 +1,4 @@
 // lib/provider/main_provider.dart
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:treezoo_frontend/model/main_model.dart';
 import 'package:treezoo_frontend/service/family_service.dart';
@@ -42,8 +41,9 @@ final familyTreeProvider = FutureProvider<Map<int, AnimalSummary>>((ref) async {
 });
 
 // 特定の動物IDを引数に取る家系図プロバイダー
-final familyTreeProvider2 = FutureProvider.family<Map<int, AnimalSummary>, int>(
-    (ref, rootAnimalId) async {
+final familyTreeProviderById =
+    FutureProvider.family<Map<int, AnimalSummary>, int>(
+        (ref, rootAnimalId) async {
   final familyService = ref.read(familyServiceProvider);
   return familyService.fetchAnimalsWithRelationsByRootId(rootAnimalId);
 });

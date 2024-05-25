@@ -44,15 +44,15 @@ class MainScreen extends ConsumerWidget {
       body: Stack(
         children: <Widget>[
           // 家系図領域
-          // InteractiveViewer(
-          //   boundaryMargin: EdgeInsets.all(80),
-          //   minScale: 0.1,
-          //   maxScale: 5.0,
-          //   transformationController: transformationController,
-          //   child: FamilyTreeScreen(),
-          // ),
+          InteractiveViewer(
+            boundaryMargin: EdgeInsets.all(80),
+            minScale: 0.1,
+            maxScale: 5.0,
+            transformationController: transformationController,
+            child: FamilyTreeScreen(),
+          ),
 
-          FamilyTreeScreen(),
+          // FamilyTreeScreen(),
 
           /*
           // 家系図その1: とりあえず並べて表示してみる実装
