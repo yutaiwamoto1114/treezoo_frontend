@@ -1,17 +1,25 @@
 <!-- omit in toc -->
 # treezoo_frontend
 
-動物園で暮らす動物たちの家系図アプリ「TreeZoo」のフロントエンドを提供するFlutterプロジェクトです。
+動物園で暮らす動物たちの家系図アプリ「TreeZoo」のフロントエンドを提供するFlutterプロジェクトです。バックエンドを提供するGoプロジェクトは [treezoo_backend](https://github.com/yutaiwamoto1114/treezoo_backend) にて公開しています。
+
+- [1. 構成](#1-構成)
+- [2. ディレクトリ構成](#2-ディレクトリ構成)
+- [3. デバッグ方法](#3-デバッグ方法)
+- [4. ビルド方法](#4-ビルド方法)
+  - [4.1. Webビルド(PCブラウザ)](#41-webビルドpcブラウザ)
+  - [4.2. iOSビルド](#42-iosビルド)
+  - [4.3. Androidビルド](#43-androidビルド)
+  - [4.4. Windowsビルド](#44-windowsビルド)
+- [5. デプロイ](#5-デプロイ)
+  - [5.1. Apache HTTP Serverへのデプロイ](#51-apache-http-serverへのデプロイ)
 
 ## 1. 構成
-- Flutter 3.19.5
+- Flutter 3.22.1
   - Riverpod
   - Http
   - Logger
   - Google Fonts
-
-バックエンドを提供するGoプロジェクトは [treezoo_backend](https://github.com/yutaiwamoto1114/treezoo_backend) にて公開しています。
-
 
 ## 2. ディレクトリ構成
 ```
@@ -77,8 +85,8 @@
 ### 4.4. Windowsビルド
 - 対応予定なし
 
-## デプロイ
-### Apache HTTP Serverへのデプロイ
+## 5. デプロイ
+### 5.1. Apache HTTP Serverへのデプロイ
 1. Apache HTTP Server 2.4 をダウンロードし、任意のディレクトリに配置します。
    - [Apache VS17 binaries and modules download](https://www.apachelounge.com/download/`)
 2. システム環境変数PathにApache24のbinフォルダへのパスを登録します。
